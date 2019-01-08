@@ -1,8 +1,10 @@
 """The app module, containing the app factory function."""
 
-from flask import Flask #(Flask, redirect, url_for)
+from flask import (Flask, jsonify)
+from flask_restful import Api
 
 from app.api.settings import (ProdConfig, Config)
+from app.api.resources import Index
 
 def create_app(config_object: Config = ProdConfig)->Flask:
     """An application factory, as explained here:
@@ -19,40 +21,46 @@ def create_app(config_object: Config = ProdConfig)->Flask:
 
     app.config.from_object(config_object)
 
-    register_extensions(app)
-    register_blueprints(app)
-    register_shellcontext(app)
-    register_commands(app)
+    api = make_restful(app)
+    api = register_resource(api)
 
-    @app.route('/', methods=['GET'])
-    def root_main()->str:
-        return '<div id=\'info\' style=\'text-align:center\'><h1>Hello World!</h1><br><h2>This is the API for B2W Star Wars Challenge!</h2><br><br><br><h3>RAPHAEL SATHLER - 2019.</h3></div>'
+    register_handlers(app)
 
     return app
 
+def make_restful(app: Flask)->Api:
+    """This converts the Flask app to use Restful resources easily
 
-def register_extensions(app: Flask)->None:
-    """Register Flask extensions."""
+    Arguments:
+        app {Flask} -- The app which 'will become' restful
 
-    return None
+    Returns:
+        api {Api} -- An object of Api Restful class.
+    """
+    api = Api(app)
 
+    return api
 
-def register_blueprints(app: Flask)->None:
-    """Register Flask blueprints."""
+def register_resource(api: Api)->Api:
+    """Register API resource."""
 
-    return None
+    api.add_resource(Index, "/", endpoint="index")
 
+    return api
 
-def register_shellcontext(app: Flask)->None:
-    """Register shell context objects."""
-    def shell_context()->dict:
-        """Shell context objects."""
-        return {
+def register_handlers(app: Flask)->None:
+    """Register handlers of app"""
+
+    @app.errorhandler(404)
+    def page_not_found(_e): # pylint: disable=unused-variable, unused-argument
+        """Send message to the user with notFound 404 status."""
+        message = {
+            "err":
+                {
+                    "msg": "This route is currently not supported. Please refer API documentation."
+                }
         }
 
-    app.shell_context_processor(shell_context)
-
-def register_commands(app: Flask)->None:
-    """Register Click commands."""
-    return None
-    
+        resp = jsonify(message)
+        resp.status_code = 404
+        return resp
