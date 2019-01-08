@@ -15,7 +15,7 @@ def create_app(config_object: Config = ProdConfig)->Flask:
         Flask -- Returns a Flask object
     """
 
-    app = Flask(__name__.split('.')[0])
+    app = Flask('B2W Star Wars Challenge')
 
     app.config.from_object(config_object)
 
