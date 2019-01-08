@@ -1,6 +1,6 @@
 """The app module, containing the app factory function."""
 
-from flask import Flask #(Flask, redirect, url_for)
+from flask import (Flask, jsonify)
 
 from app.api.settings import (ProdConfig, Config)
 
@@ -24,9 +24,7 @@ def create_app(config_object: Config = ProdConfig)->Flask:
     register_shellcontext(app)
     register_commands(app)
 
-    @app.route('/', methods=['GET'])
-    def root_main()->str:
-        return '<div id=\'info\' style=\'text-align:center\'><h1>Hello World!</h1><br><h2>This is the API for B2W Star Wars Challenge!</h2><br><br><br><h3>RAPHAEL SATHLER - 2019.</h3></div>'
+    register_handlers(app)
 
     return app
 
@@ -42,17 +40,20 @@ def register_blueprints(app: Flask)->None:
 
     return None
 
+def register_handlers(app: Flask)->None:
+    """Register handlers of app"""
 
-def register_shellcontext(app: Flask)->None:
-    """Register shell context objects."""
-    def shell_context()->dict:
-        """Shell context objects."""
-        return {
+    @app.errorhandler(404)
+    def page_not_found(): # pylint: disable=unused-variable
+        """Send message to the user with notFound 404 status."""
+        message = {
+            "err":
+                {
+                    "msg": "This route is currently not supported. Please refer API documentation."
+                }
         }
 
-    app.shell_context_processor(shell_context)
-
-def register_commands(app: Flask)->None:
-    """Register Click commands."""
-    return None
+        resp = jsonify(message)
+        resp.status_code = 404
+        return resp
     
