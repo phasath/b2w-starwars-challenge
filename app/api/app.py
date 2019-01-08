@@ -64,4 +64,3 @@ def register_handlers(app: Flask)->None:
         resp = jsonify(message)
         resp.status_code = 404
         return resp
-    
