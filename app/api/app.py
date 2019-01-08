@@ -44,7 +44,7 @@ def register_handlers(app: Flask)->None:
     """Register handlers of app"""
 
     @app.errorhandler(404)
-    def page_not_found(): # pylint: disable=unused-variable
+    def page_not_found(_e): # pylint: disable=unused-variable, unused-argument
         """Send message to the user with notFound 404 status."""
         message = {
             "err":
