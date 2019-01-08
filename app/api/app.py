@@ -26,7 +26,7 @@ def create_app(config_object: Config = ProdConfig)->Flask:
 
     @app.route('/', methods=['GET'])
     def root_main()->str:
-        return 'Hello World.\nThis is the B2W Star Wars Challenge!'
+        return '<div id=\'info\' style=\'text-align:center\'><h1>Hello World!</h1><br><h2>This is the API for B2W Star Wars Challenge!</h2><br><br><br><h3>RAPHAEL SATHLER - 2019.</h3></div>'
 
     return app
 
