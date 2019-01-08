@@ -1,8 +1,10 @@
 """The app module, containing the app factory function."""
 
 from flask import (Flask, jsonify)
+from flask_restful import Api
 
 from app.api.settings import (ProdConfig, Config)
+from app.api.resources import Index
 
 def create_app(config_object: Config = ProdConfig)->Flask:
     """An application factory, as explained here:
@@ -19,26 +21,32 @@ def create_app(config_object: Config = ProdConfig)->Flask:
 
     app.config.from_object(config_object)
 
-    register_extensions(app)
-    register_blueprints(app)
-    register_shellcontext(app)
-    register_commands(app)
+    api = make_restful(app)
+    api = register_resource(api)
 
     register_handlers(app)
 
     return app
 
+def make_restful(app: Flask)->Api:
+    """This converts the Flask app to use Restful resources easily
 
-def register_extensions(app: Flask)->None:
-    """Register Flask extensions."""
+    Arguments:
+        app {Flask} -- The app which 'will become' restful
 
-    return None
+    Returns:
+        api {Api} -- An object of Api Restful class.
+    """
+    api = Api(app)
 
+    return api
 
-def register_blueprints(app: Flask)->None:
-    """Register Flask blueprints."""
+def register_resource(api: Api)->Api:
+    """Register API resource."""
 
-    return None
+    api.add_resource(Index, "/", endpoint="index")
+
+    return api
 
 def register_handlers(app: Flask)->None:
     """Register handlers of app"""
