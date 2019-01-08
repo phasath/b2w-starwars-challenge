@@ -17,7 +17,7 @@ def create_app(config_object: Config = ProdConfig)->Flask:
         Flask -- Returns a Flask object
     """
 
-    app = Flask(__name__.split('.')[0], static_url_path='/static', static_folder='static')
+    app = Flask('B2W Star Wars Challenge')
 
     app.config.from_object(config_object)
 
