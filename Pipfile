@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+mock = "*"
+pytest = "*"
+coverage = "*"
+pytest-cov = "*"
+pylint = "*"
+
+[packages]
+requests = "*"
+python-decouple = "*"
+flask = "*"
+gunicorn = "*"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+start = "bash scripts/run_local.sh"
+dev = "bash scripts/run_local_dev.sh"
+lint = "bash scripts/run_linting.sh"
+tests = "bash scripts/run_tests.sh"
