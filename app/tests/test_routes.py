@@ -1,11 +1,14 @@
+""" Module for test the endpoints
+"""
+
 from unittest import TestCase
-from mock import MagicMock, patch
 
 from app.autoapp import APP
 
 class EndpointsResponseStatusCodeTest(TestCase):
-
-    def setUp(self):
+    """ Class to test whether the responde status code of endpoints are the desired
+    """
+    def setUp(self)->None:
         super(EndpointsResponseStatusCodeTest, self).setUp()
         APP.testing = True
         self.GET_endpoints = (
@@ -16,7 +19,10 @@ class EndpointsResponseStatusCodeTest(TestCase):
         super(EndpointsResponseStatusCodeTest, self).tearDown()
         APP.testing = False
 
-    def test_all_endpoints_should_return_status_code_200(self):
+
+    def test_all_get_endpoints_should_return_status_code_200(self)->None:
+        """ Function that tests all endpoints of HTTP Verb GET and whether they return 200
+        """
         client = APP.test_client()
         for endpoint in self.GET_endpoints:
             response = client.get(endpoint)
