@@ -11,11 +11,12 @@ class EndpointsResponseStatusCodeTest(TestCase):
     def setUp(self)->None:
         super(EndpointsResponseStatusCodeTest, self).setUp()
         APP.testing = True
-        self.GET_endpoints = (
+        self.get_endpoints = (
             '/',
         )
 
-    def tearDown(self):
+
+    def tearDown(self)->None:
         super(EndpointsResponseStatusCodeTest, self).tearDown()
         APP.testing = False
 
@@ -24,6 +25,8 @@ class EndpointsResponseStatusCodeTest(TestCase):
         """ Function that tests all endpoints of HTTP Verb GET and whether they return 200
         """
         client = APP.test_client()
-        for endpoint in self.GET_endpoints:
+        for endpoint in self.get_endpoints:
             response = client.get(endpoint)
-            self.assertEqual(200, response.status_code, 'Endpoint {} returned status {}'.format(endpoint, response.status_code))
+            self.assertEqual(200, response.status_code,
+                             f'Endpoint {endpoint} returned status {response.status_code}')
+
