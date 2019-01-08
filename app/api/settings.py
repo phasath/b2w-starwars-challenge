@@ -56,7 +56,6 @@ class TestConfig(Config): # pylint: disable=too-few-public-methods
                           and overwrites some parameters for tests
     """
     ENV = 'test'
-    NEWSWHIP_KEY = 'test-newswhip-key'
 
 def config_to_class(environ_class: str)->Config:
     """A function that returns the desired configuration class based on environ var
