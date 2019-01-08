@@ -30,3 +30,11 @@ class EndpointsResponseStatusCodeTest(TestCase):
             self.assertEqual(200, response.status_code,
                              f'Endpoint {endpoint} returned status {response.status_code}')
 
+    def test_wrong_endpoint_should_return_status_code_404(self)->None:
+        """Function that tests if a non-existent endpoint will return 404 based on our
+        404 app handler
+        """
+        client = APP.test_client()
+        response = client.get('non-existent-endpoint')
+        self.assertEqual(404, response.status_code,
+                         f'Endpoint non-existent-endpoint returned status {response.status_code}')
