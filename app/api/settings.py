@@ -19,8 +19,7 @@ class Config(): # pylint: disable=too-few-public-methods
 class ProdConfig(Config): # pylint: disable=too-few-public-methods
     """Production Config
 
-    Arguments:
-        Config {Class} -- Inherits from Config class and overwrites some parameters
+    Inherits from Config class and overwrites some parameters
     """
     DEBUG = False
     FLASK_ENV = 'production'
@@ -30,8 +29,7 @@ class ProdConfig(Config): # pylint: disable=too-few-public-methods
 class DevConfig(Config): # pylint: disable=too-few-public-methods
     """Development Config
 
-    Arguments:
-        Config {Class} -- Inherits from Config class and overwrites some parameters
+    Inherits from Config class and overwrites some parameters
     """
     FLASK_ENV = 'development'
     ENV = 'development'
@@ -40,8 +38,7 @@ class DevConfig(Config): # pylint: disable=too-few-public-methods
 class StageConfig(Config): # pylint: disable=too-few-public-methods
     """Stage Config
 
-    Arguments:
-        Config {Class} -- Inherits from Config class and overwrites some parameters
+    Inherits from Config class and overwrites some parameters
     """
     FLASK_ENV = 'production'
     ENV = 'stage'
@@ -51,8 +48,7 @@ class StageConfig(Config): # pylint: disable=too-few-public-methods
 class TestConfig(Config): # pylint: disable=too-few-public-methods
     """Test Config
 
-    Arguments:
-        Config {Class} -- This is a special class that inherits from Config class
+    This is a special class that inherits from Config class
                           and overwrites some parameters for tests
     """
     ENV = 'test'

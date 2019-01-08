@@ -15,6 +15,7 @@ requests = "*"
 python-decouple = "*"
 flask = "*"
 gunicorn = "*"
+flask-restful = "*"
 
 [requires]
 python_version = "3.7"
