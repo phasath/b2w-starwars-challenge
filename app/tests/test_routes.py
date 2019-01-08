@@ -36,5 +36,8 @@ class EndpointsResponseStatusCodeTest(TestCase):
         """
         client = APP.test_client()
         response = client.get('non-existent-endpoint')
+        err_msg = response.json
         self.assertEqual(404, response.status_code,
                          f'Endpoint non-existent-endpoint returned status {response.status_code}')
+        self.assertEqual(err_msg['err']['msg'],
+                         'This route is currently not supported. Please refer API documentation.')
