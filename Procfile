@@ -1,0 +1,1 @@
+web: gunicorn app.autoapp:APP -b ${HOST}:${PORT} --chdir app
