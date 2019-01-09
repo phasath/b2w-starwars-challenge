@@ -4,7 +4,7 @@ from flask import (Flask, jsonify)
 from flask_restful import Api
 
 from app.api.settings import (ProdConfig, Config)
-from app.api.resources import Index
+from app.api.extensions import (CFG, mongo)
 
 def create_app(config_object: Config = ProdConfig)->Flask:
     """An application factory, as explained here:
@@ -20,6 +20,7 @@ def create_app(config_object: Config = ProdConfig)->Flask:
     app = Flask('B2W Star Wars Challenge')
 
     app.config.from_object(config_object)
+    register_extension(app)
 
     api = make_restful(app)
     api = register_resource(api)
@@ -40,6 +41,14 @@ def make_restful(app: Flask)->Api:
     api = Api(app)
 
     return api
+
+def register_extension(app: Flask)->None:
+    """Register APP extensions."""
+
+    mongo.init_app(app=app, uri=CFG.MONGODB_URI)
+    
+
+    return None
 
 def register_resource(api: Api)->Api:
     """Register API resource."""
