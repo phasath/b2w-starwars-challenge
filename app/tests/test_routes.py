@@ -40,4 +40,5 @@ class EndpointsResponseStatusCodeTest(TestCase):
         self.assertEqual(404, response.status_code,
                          f'Endpoint non-existent-endpoint returned status {response.status_code}')
         self.assertEqual(err_msg['err']['msg'],
-                         'This route is currently not supported. Please refer API documentation.')
+                         'This route is currently not supported.\
+                             Please refer API documentation.')
