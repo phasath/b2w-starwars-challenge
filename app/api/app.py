@@ -56,7 +56,8 @@ def register_extension(app: Flask)->None:
 def register_indexes()->None:
     """Register APP extensions."""
 
-    mongo.db.planets.create_index([('idx_planet_name', TEXT)], name='search_index', default_language='english')
+    mongo.db.planets.create_index([('idx_planet_name', TEXT)], name='search_index',
+                                     default_language='english', unique=True, background=True)
 
     return None
 
