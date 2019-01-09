@@ -5,6 +5,7 @@ from flask_restful import Api
 
 from app.api.settings import (ProdConfig, Config)
 from app.api.extensions import (CFG, mongo)
+from app.api.utils.error_messages import error_message
 
 def create_app(config_object: Config = ProdConfig)->Flask:
     """An application factory, as explained here:
@@ -63,13 +64,5 @@ def register_handlers(app: Flask)->None:
     @app.errorhandler(404)
     def page_not_found(_e): # pylint: disable=unused-variable, unused-argument
         """Send message to the user with notFound 404 status."""
-        message = {
-            "err":
-                {
-                    "msg": "This route is currently not supported. Please refer API documentation."
-                }
-        }
+        return error_message(404, 'This route is currently not supported. Please refer API documentation.')
 
-        resp = jsonify(message)
-        resp.status_code = 404
-        return resp
