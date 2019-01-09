@@ -16,6 +16,8 @@ python-decouple = "*"
 flask = "*"
 gunicorn = "*"
 flask-restful = "*"
+flask-pymongo = "*"
+retrying = "*"
 
 [requires]
 python_version = "3.7"
