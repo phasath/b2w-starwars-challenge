@@ -2,6 +2,7 @@
 
 from flask import (Flask, jsonify)
 from flask_restful import Api
+from pymongo import TEXT
 
 from app.api.settings import (ProdConfig, Config)
 from app.api.extensions import (CFG, mongo)
@@ -50,6 +51,14 @@ def register_extension(app: Flask)->None:
     
 
     return None
+
+def register_indexes()->None:
+    """Register APP extensions."""
+
+    mongo.db.planets.create_index([('idx_planet_name', TEXT)], name='search_index', default_language='english')
+
+    return None
+
 
 def register_resource(api: Api)->Api:
     """Register API resource."""
