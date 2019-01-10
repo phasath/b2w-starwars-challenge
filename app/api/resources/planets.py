@@ -58,7 +58,7 @@ class Planet(Resource):
             for planet in MONGO.db.planets.find():
                 data.append(Planet.transform_data(planet))
 
-        if data == 0:
+        if not data:
             return success_message(204, data)
 
         return jsonify(data)
@@ -87,7 +87,7 @@ class Planet(Resource):
             return error_message(403,
                                  'This planet was not found on StarWars API.') # Prohibited
 
-        inserted = MONGO.db.planets.insert_one(data)
+        MONGO.db.planets.insert_one(data)
         # inserted = MONGO.db.planets.find_one({"_id": ObjectId(inserted)})
 
         return success_message(201, Planet.transform_data(data))
