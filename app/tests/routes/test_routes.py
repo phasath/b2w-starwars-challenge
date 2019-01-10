@@ -13,6 +13,7 @@ class EndpointsResponseStatusCodeTest(TestCase):
         APP.testing = True
         self.get_endpoints = (
             '/',
+            '/api/planets'
         )
 
 
