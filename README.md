@@ -18,7 +18,7 @@ This is a job interview challenge. B2W people are very into Star Wars. So they c
 
 A REST API should be created to serve the Name, Wheather and Surface of each Planet from Star Wars.
 It's also desirable to know how many movies did that planet appeared.
-This information is in the StarWars Public API: https://swapi.co/.
+This information is in the [StarWars Public API](https://swapi.co/).
 It's also required a CRUD: add planet, list planets, search by name, search by id and remove planets.
 
 ## What is this?
@@ -31,32 +31,36 @@ it'll be online in [heroku](https://b2w-starwars-challenge.herokuapp.com/).
 
 ### StarWars API
 
-The API doesn't keep data from the StarWars API in the database so, we will always have the most updated information about the planets.
-Having this in mind, we use also a cache with time to die of 300s to avoid be constantly making requests from StarWars API.
+The API doesn't keep data from the StarWars API in the database so, it will always have the most updated information about the planets.
+Having this in mind, it uses a cache with a time to die of 300s to avoid be constantly making requests from StarWars API.
 
 ### Indexes
 
-We also created a index on the collections used (`planets`) to allow faster queries on planet names.
+It also creates a index on the collections used (`planets`) to allow faster queries on planet names.
 
 ### Error Messages
 
-We created a function to return error messages more humanized along with the error code.
+It creates a function to return error messages more humanized along with the error code.
 
 ### App Factory Format
 
-We use the APP Factory format to start flask applications.
+It uses the APP Factory format to start flask applications.
 
 ### Flask Restful
 
-We are using the Flask Restful package to allow better user of the HTTP verbs and implementation.
+It is using the Flask Restful package to allow better use of the HTTP verbs and implementation.
 
 ### Extensions
 
-We are also using Extensions to keep everything that is used wide-spreadly on the API imported from the same place, avoiding misleading configuration.
+It is also using Extensions to keep everything that is used wide-spreadly on the API imported from the same place, avoiding misleading configuration.
 
 ### Settings
 
 All the configurations regarding this API is found under the `settings.py` file and they can also be overwritten using `environment variable`.
+
+### Tests
+
+All the routes are tested and there's also a coverage report.
 
 # Instalation
 
@@ -76,6 +80,12 @@ If you don't have a user, you can, as long as your mongodb instance is in localh
 To do so, use:
 ```
 $ pipenv run setup_mongo
+```
+
+If you want to run tests, please, setup mongo with the test instance, where user is `chewbacca` and password `GGGWARRRHHWWWW` or use:
+
+```
+$ pipenv run setup_test_mongo
 ```
 
 ### Python
