@@ -60,7 +60,7 @@ All the configurations regarding this API is found under the `settings.py` file 
 
 ### Tests
 
-All the routes are tested and there's also a coverage report.
+All the routes are tested and there's also a coverage report.htmlcov
 
 # Instalation
 
