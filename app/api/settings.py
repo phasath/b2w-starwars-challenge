@@ -13,8 +13,9 @@ class Config(): # pylint: disable=too-few-public-methods
     TESTING = False
     CSRF_ENABLED = True
     MONGODB_URI = config('MONGODB_URI',
-                         default='mongodb://heroku_xtghhb5l:3jq91uffr61e0jun3fbqfk4ccn@\
-                         ds151354.mlab.com:51354/heroku_xtghhb5l')
+                         default=('mongodb://heroku_xtghhb5l:3jq91uffr61e0jun3fbqfk4ccn@'
+                         'ds151354.mlab.com:51354/heroku_xtghhb5l'))
+                         
     SECRET_KEY = config('SECRET_KEY',
                         default='.?m]GJ@L9vA>Te6q;<iA:jTm{=?JwqV_@>+ewNyCXxcH//8Mq7zOYUeFT3<jv{@E')
 
@@ -57,8 +58,9 @@ class TestConfig(Config): # pylint: disable=too-few-public-methods
                           and overwrites some parameters for tests
     """
     ENV = 'test'
-    MONGODB_URI = config('MONGODB_URI',
-                         default='mongodb://chewbacca:GGGWARRRHHWWWW@172.17.0.7:27017/star_wars_planets_test')
+    MONGODB_URI = config('MONGODB_URI', default=
+                         ("mongodb://chewbacca:GGGWARRRHHWWWW@"
+                          "172.17.0.7:27017/star_wars_planets_test"))
 
 
 def config_to_class(environ_class: str)->Config:
