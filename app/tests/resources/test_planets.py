@@ -97,3 +97,21 @@ class PlanetsTest(BaseTest):
         response = client.post('/api/planets',json=planet_data)
         self.assertEqual(403, response.status_code)
 
+    def test_if_put_updates_data_from_planet(self):
+        """Test if it will update the data from a planet
+        """
+        planet_data = self.create_planet()
+
+        planet_data_update = {"name":"Alderaan","climate":"temperate","terrain":"grasslands, mountains"}
+        client = APP.test_client()
+
+        response = client.put(f"/api/planets/{planet_data['id']}",json=planet_data_update)
+        self.assertEqual(200, response.status_code)
+
+        r_data = response.json
+        for key in planet_data:
+            self.assertEqual(r_data[key],planet_data[key])
+
+        
+
+        
