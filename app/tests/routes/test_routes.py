@@ -13,7 +13,6 @@ class EndpointsResponseStatusCodeTest(TestCase):
         APP.testing = True
         self.get_endpoints = (
             '/',
-            '/api/planets'
         )
 
 
@@ -22,8 +21,8 @@ class EndpointsResponseStatusCodeTest(TestCase):
         APP.testing = False
 
 
-    def test_all_get_endpoints_should_return_status_code_200(self)->None:
-        """ Function that tests all endpoints of HTTP Verb GET and whether they return 200
+    def test_root_endpoints_should_return_status_code_200(self)->None:
+        """ Function that tests root endpoints of HTTP Verb GET and whether they return 200
         """
         client = APP.test_client()
         for endpoint in self.get_endpoints:
