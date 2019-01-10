@@ -31,7 +31,7 @@ class Planet(Resource):
             "name": data['name'],
             "climate": data['climate'],
             "terrain": data['terrain'],
-            "apparitionsCount": SWAPI.get_planet(data['name'])
+            "apparitions_count": SWAPI.get_planet(data['name'])
             }
 
     @staticmethod
@@ -87,10 +87,10 @@ class Planet(Resource):
             return error_message(403,
                                  'This planet was not found on StarWars API.') # Prohibited
 
-        inserted = MONGO.db.planets.insert(data)
-        inserted = MONGO.db.planets.find_one({"_id": ObjectId(inserted)})
+        inserted = MONGO.db.planets.insert_one(data)
+        # inserted = MONGO.db.planets.find_one({"_id": ObjectId(inserted)})
 
-        return success_message(201, Planet.transform_data(inserted))
+        return success_message(201, Planet.transform_data(data))
 
 
     @staticmethod
@@ -110,7 +110,7 @@ class Planet(Resource):
         if not MONGO.db.planets.find_one({"_id": ObjectId(planet_id)}):
             return error_message(204, 'Planet id didn\'t find')
 
-        updated = MONGO.db.planets.update({'_id': ObjectId(planet_id)}, {'$set': data})
+        updated = MONGO.db.planets.update_one({'_id': ObjectId(planet_id)}, {'$set': data})
         updated = MONGO.db.planets.find_one({"_id": ObjectId(planet_id)})
 
         return success_message(200, Planet.transform_data(updated))
