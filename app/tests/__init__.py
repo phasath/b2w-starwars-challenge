@@ -31,7 +31,7 @@ class BaseTest(TestCase):
         """
 
         if not planet_id:
-            planet_id = randint(1, 62)
+            planet_id = randint(1, 61)
 
         data = get(url=f'https://swapi.co/api/planets/{planet_id}/?format=json')
 
