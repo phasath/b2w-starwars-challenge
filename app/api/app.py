@@ -71,6 +71,8 @@ def register_resource(api: Api)->Api:
                      endpoint="search-planet-id")
     api.add_resource(Planet, "/api/planets/name/<string:planet_name>",
                      endpoint="search-planet-name")
+    api.add_resource(Planet, "/api/planets/delete/",
+                     endpoint="delete-planets")
     api.add_resource(Planet, "/api/planets/delete/<string:planet_name>",
                      endpoint="delete-planet-name")
 
