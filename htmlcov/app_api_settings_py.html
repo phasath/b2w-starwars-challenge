@@ -191,7 +191,7 @@
 <p id="t39" class="stm run hide_run">    <span class="nam">ENV</span> <span class="op">=</span> <span class="str">'development'</span><span class="strut">&nbsp;</span></p>
 <p id="t40" class="stm run hide_run">    <span class="nam">DEBUG</span> <span class="op">=</span> <span class="key">True</span><span class="strut">&nbsp;</span></p>
 <p id="t41" class="stm run hide_run">    <span class="nam">MONGODB_URI</span> <span class="op">=</span> <span class="nam">config</span><span class="op">(</span><span class="str">'MONGODB_URI'</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t42" class="pln">                         <span class="nam">default</span><span class="op">=</span><span class="str">'mongodb://obi_wan:kenobi@172.17.0.7:27017/star_wars_planets'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t42" class="pln">                         <span class="nam">default</span><span class="op">=</span><span class="str">'mongodb://obi_wan:kenobi@127.0.0.1:27017/star_wars_planets'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t43" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t44" class="stm run hide_run"><span class="key">class</span> <span class="nam">StageConfig</span><span class="op">(</span><span class="nam">Config</span><span class="op">)</span><span class="op">:</span> <span class="com"># pylint: disable=too-few-public-methods</span><span class="strut">&nbsp;</span></p>
 <p id="t45" class="pln">    <span class="str">"""Stage Config</span><span class="strut">&nbsp;</span></p>
@@ -212,7 +212,7 @@
 <p id="t60" class="stm run hide_run">    <span class="nam">ENV</span> <span class="op">=</span> <span class="str">'test'</span><span class="strut">&nbsp;</span></p>
 <p id="t61" class="stm run hide_run">    <span class="nam">MONGODB_URI</span> <span class="op">=</span> <span class="nam">config</span><span class="op">(</span><span class="str">'MONGODB_URI'</span><span class="op">,</span> <span class="nam">default</span><span class="op">=</span><span class="strut">&nbsp;</span></p>
 <p id="t62" class="pln">                         <span class="op">(</span><span class="str">"mongodb://chewbacca:GGGWARRRHHWWWW@"</span><span class="strut">&nbsp;</span></p>
-<p id="t63" class="pln">                          <span class="str">"172.17.0.7:27017/star_wars_planets_test"</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t63" class="pln">                          <span class="str">"127.0.0.1:27017/star_wars_planets_test"</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t64" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t65" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t66" class="stm run hide_run"><span class="key">def</span> <span class="nam">config_to_class</span><span class="op">(</span><span class="nam">environ_class</span><span class="op">:</span> <span class="nam">str</span><span class="op">)</span><span class="op">-></span><span class="nam">Config</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
@@ -240,7 +240,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.2</a>,
-            created at 2019-01-10 17:48
+            created at 2019-01-11 04:52
         </p>
     </div>
 </div>
