@@ -135,7 +135,6 @@ class PlanetsTest(BaseTest):
         """Test if it will update the data from a planet
         """
         planet_data = BaseTest.create_planet()
-        print(planet_data)
 
         planet_data_update = {"name":"Alderaan", "climate":"temperate",
                               "terrain":"grasslands, mountains"}
@@ -148,3 +147,77 @@ class PlanetsTest(BaseTest):
         r_data = response.json
         for key in planet_data_update:
             self.assertEqual(r_data[key], planet_data_update[key])
+
+    def test_if_put_updates_fails_if_no_planet_id(self):
+        """If there's no planet_id, then, put will not understand this
+        requisition, so it must returns a 404
+        """
+        planet_data = BaseTest.create_planet()
+
+        planet_data_update = {"name":"Alderaan", "climate":"temperate",
+                              "terrain":"grasslands, mountains"}
+
+        client = APP.test_client()
+
+        response = client.put(f"/api/planets/", json=planet_data_update)
+        self.assertEqual(404, response.status_code)
+
+    def test_if_put_updates_fails_if_data(self):
+        """Test if it will fails if no planet_id
+        """
+        planet_data = BaseTest.create_planet()
+
+        planet_data_update = {}
+
+        client = APP.test_client()
+
+        response = client.put(f"/api/planets/{planet_data['id']}", json=planet_data_update)
+        self.assertEqual(422, response.status_code)
+
+    def test_if_put_updates_fails_if_wrong_planet_id(self):
+        """Test if it will fails if no planet_id
+        """
+        planet_data = BaseTest.create_planet()
+
+        planet_data_update = {"name":"Alderaan", "climate":"temperate",
+                              "terrain":"grasslands, mountains"}
+
+        dif_id = ObjectId()
+
+        if planet_data['id'] == str(dif_id):
+            dif_id = ObjectId()
+
+        client = APP.test_client()
+
+        response = client.put(f"/api/planets/{ObjectId()}", json=planet_data_update)
+        self.assertEqual(204, response.status_code)
+
+    def test_if_deletes_removes_planets_by_planet_id(self):
+        """Test if it will remove a planet using planet_id
+        """
+        planet_data = BaseTest.create_planet()
+
+        client = APP.test_client()
+
+        response = client.delete(f"/api/planets/{planet_data['id']}")
+        self.assertEqual(204, response.status_code)
+
+    def test_if_deletes_removes_planets_by_planet_name(self):
+        """Test if it will remove a planet using planet_name
+        """
+        planet_data = BaseTest.create_planet()
+
+        client = APP.test_client()
+
+        response = client.delete(f"/api/planets/delete/{planet_data['name']}")
+        self.assertEqual(204, response.status_code)
+
+    def test_if_do_not_deletes_if_no_planet_name(self):
+        """Test if it will remove a planet using planet_name
+        """
+        planet_data = BaseTest.create_planet()
+
+        client = APP.test_client()
+
+        response = client.delete(f"/api/planets/delete/")
+        self.assertEqual(422, response.status_code)
