@@ -1,10 +1,13 @@
 """The app module, containing the app factory function."""
 
-from flask import (Flask, jsonify)
+from flask import Flask
 from flask_restful import Api
+from pymongo import TEXT
 
 from app.api.settings import (ProdConfig, Config)
-from app.api.resources import Index
+from app.api.resources import (Index, Planet)
+from app.api.extensions import (CFG, MONGO)
+from app.api.utils.messages import error_message
 
 def create_app(config_object: Config = ProdConfig)->Flask:
     """An application factory, as explained here:
@@ -20,11 +23,12 @@ def create_app(config_object: Config = ProdConfig)->Flask:
     app = Flask('B2W Star Wars Challenge')
 
     app.config.from_object(config_object)
+    register_extension(app)
+    register_handlers(app)
+    register_indexes()
 
     api = make_restful(app)
     api = register_resource(api)
-
-    register_handlers(app)
 
     return app
 
@@ -41,10 +45,36 @@ def make_restful(app: Flask)->Api:
 
     return api
 
+
+def register_extension(app: Flask)->None:
+    """Register APP extensions."""
+
+    MONGO.init_app(app=app, uri=CFG.MONGODB_URI)
+
+
+def register_indexes()->None:
+    """Register APP extensions."""
+
+    MONGO.db.planets.create_index([('idx_planet_name', TEXT)], name='search_index',
+                                  default_language='english', unique=True, background=True)
+
+
 def register_resource(api: Api)->Api:
     """Register API resource."""
 
     api.add_resource(Index, "/", endpoint="index")
+    # api.add_resource(Planet, "/api", endpoint="planet")
+    api.add_resource(Planet, "/api/planets", endpoint="planets")
+    api.add_resource(Planet, "/api/planets/<string:planet_id>",
+                     endpoint="planets-id")
+    api.add_resource(Planet, "/api/planets/id/<string:planet_id>",
+                     endpoint="search-planet-id")
+    api.add_resource(Planet, "/api/planets/name/<string:planet_name>",
+                     endpoint="search-planet-name")
+    api.add_resource(Planet, "/api/planets/delete/",
+                     endpoint="delete-planets")
+    api.add_resource(Planet, "/api/planets/delete/<string:planet_name>",
+                     endpoint="delete-planet-name")
 
     return api
 
@@ -54,13 +84,5 @@ def register_handlers(app: Flask)->None:
     @app.errorhandler(404)
     def page_not_found(_e): # pylint: disable=unused-variable, unused-argument
         """Send message to the user with notFound 404 status."""
-        message = {
-            "err":
-                {
-                    "msg": "This route is currently not supported. Please refer API documentation."
-                }
-        }
-
-        resp = jsonify(message)
-        resp.status_code = 404
-        return resp
+        return error_message(404, 'This route is currently not supported.\
+                             Please refer API documentation.')
