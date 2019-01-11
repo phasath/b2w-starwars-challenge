@@ -22,7 +22,7 @@ class BaseTest(TestCase):
         MONGO.db.planets.create_index([('idx_planet_name', TEXT)], name='search_index',
                                       default_language='english', unique=True, background=True)
 
-    
+
     @staticmethod
     def create_planet(planet_id: int = None)->bool:
         """ Create a random planet and insert it on the database.

@@ -15,15 +15,16 @@ class PlanetsTest(BaseTest):
         And is getting the apparitions_count from the SWAPI
         """
 
-        data = {"_id": ObjectId(), "name":"Alderaan", "climate":"temperate", "terrain":"grasslands, mountains"}
+        data = {"_id": ObjectId(), "name":"Alderaan", "climate":"temperate",
+                "terrain":"grasslands, mountains"}
 
         transformed_data = Planet.transform_data(data)
 
         data["id"] = str(data['_id'])
         del data['_id']
 
-        for key in data.keys():
-            self.assertEqual(data[key], transformed_data[key])
+        for _k, _v in data.items():
+            self.assertEqual(_v, transformed_data[_k])
 
     def test_get_all_planets(self):
         """Test if planets will return as expected.
@@ -81,7 +82,7 @@ class PlanetsTest(BaseTest):
 
         client = APP.test_client()
         response = client.get('/api/planets')
-        
+
         self.assertEqual(204, response.status_code)
 
     def test_if_post_inserts_a_planet(self):
@@ -152,7 +153,7 @@ class PlanetsTest(BaseTest):
         """If there's no planet_id, then, put will not understand this
         requisition, so it must returns a 404
         """
-        planet_data = BaseTest.create_planet()
+        BaseTest.create_planet()
 
         planet_data_update = {"name":"Alderaan", "climate":"temperate",
                               "terrain":"grasslands, mountains"}
@@ -215,7 +216,7 @@ class PlanetsTest(BaseTest):
     def test_if_do_not_deletes_if_no_planet_name(self):
         """Test if it will remove a planet using planet_name
         """
-        planet_data = BaseTest.create_planet()
+        BaseTest.create_planet()
 
         client = APP.test_client()
 

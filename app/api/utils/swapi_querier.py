@@ -37,7 +37,6 @@ class SWAPI:
         """
         data = get(url=f'https://swapi.co/api/planets/?search={planet_name}&format=json')
         if data.status_code == 200:
-
             data = data.json()
             if data['count'] == 0:
                 return False
