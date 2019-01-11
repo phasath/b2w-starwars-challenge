@@ -39,7 +39,7 @@ class DevConfig(Config): # pylint: disable=too-few-public-methods
     ENV = 'development'
     DEBUG = True
     MONGODB_URI = config('MONGODB_URI',
-                         default='mongodb://obi_wan:kenobi@172.17.0.7:27017/star_wars_planets')
+                         default='mongodb://obi_wan:kenobi@127.0.0.1:27017/star_wars_planets')
 
 class StageConfig(Config): # pylint: disable=too-few-public-methods
     """Stage Config
@@ -60,7 +60,7 @@ class TestConfig(Config): # pylint: disable=too-few-public-methods
     ENV = 'test'
     MONGODB_URI = config('MONGODB_URI', default=
                          ("mongodb://chewbacca:GGGWARRRHHWWWW@"
-                          "172.17.0.7:27017/star_wars_planets_test"))
+                          "127.0.0.1:27017/star_wars_planets_test"))
 
 
 def config_to_class(environ_class: str)->Config:
