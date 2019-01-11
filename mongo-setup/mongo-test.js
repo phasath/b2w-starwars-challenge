@@ -9,7 +9,10 @@ db.createUser({
     }, {
         role: "dbOwner",
         db: "star_wars_planets_test"
-    }]
+    }],
+    mechanisms:[  
+        "SCRAM-SHA-1"
+    ]
 });
 
 db.createCollection('planets', {autoIndexId: true});
