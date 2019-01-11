@@ -129,3 +129,94 @@ Run the Tests:
 ```
 $ pipenv run tests
 ```
+
+# API Endpoints
+
+## JSON Response Example:
+
+```
+{
+    "id":"ab739d11e8df48df67ae1a9b",
+    "name":"Yavin IV",
+    "climate":"temperate, tropical",
+    "terrain":"jungle, rainforests",
+    "apparitions_count":1
+}
+```
+
+## GET /api/planets
+
+**Description:** Returns all planets from database
+
+**Response Code:** 
+- 200 when success.
+- 204 when theres no data.
+
+**Response Data:** Json with planets.
+
+
+## GET /api/planets/{planet_id}
+
+**Description:** Searchs for a planet using it's id.
+
+**Response Code:** 
+- 200 when success.
+- 204 when theres no data.
+
+**Response Data:** Json with planets.
+
+
+## GET /api/planets/name/{planet_name}
+
+**Description:** Searchs for a planet using it's name.
+
+**Response Code:**
+- 200 when success.
+- 204 when theres no data.
+
+**Response Data:** Json with planets.
+
+
+## POST /api/planets/
+
+**Description:** Inserts a new planet
+
+**Response Code:** 
+- 201 when success.
+- 422 when no data is sent on the post.
+- 409 when the planet alerady exists.
+- 403 when the planet was not found on star wars api.
+
+**Response Data:** Json with the created planet.
+
+
+## PUT /api/planets/{planet_id}
+
+**Description:** Updates a planet info
+
+**Response Code:** 
+- 200 when success.
+- 422 when no data is sent on the post.
+- 204 when planet id didn't match on db
+
+**Response Data:** Json with the updated planet.
+
+## DELETE /api/planets/{planet_id}
+
+**Description:** Deletes a planet using it's id.
+
+**Response Code:** 
+- 204 when success.
+- 422 when no planet id.
+
+**Response Data:** An empty list `[]`
+
+## DELETE /api/planets/delete/{planet_name}
+
+**Description:** Deletes a planet using it's name
+
+**Response Code:** 
+- 204 when success.
+- 422 when no planet name.
+
+**Response Data:** An empty list `[]`
